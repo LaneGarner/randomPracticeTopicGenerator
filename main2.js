@@ -10,9 +10,9 @@ window.onload = () => {
     if(typeof window.localStorage !== "undefined" && !localStorage.getItem('visited')) {
         // Set visited flag in local storage
         // let topics = ["Scales", "Ear-training", "New repertoire", "Repertoire review"];
-        let topics = [];
-        storeTopicInLocalStorage(topics);
-        displayTopics();
+        // let topics = [];
+        // storeTopicInLocalStorage(topics);
+        // displayTopics();
         localStorage.setItem('visited', true);
     } else {
         displayTopics();
