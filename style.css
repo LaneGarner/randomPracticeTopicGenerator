@@ -45,17 +45,16 @@ header button, main button {
     cursor: pointer;
     color: white;
     padding: 15px;
-    margin: 40px auto;
+    margin: 20px auto;
     border-radius: 30px;
     border: none;
     background: #ff9966;
     background: -webkit-linear-gradient(to left, #ff5e62, #ff9966);
     background: linear-gradient(to left, #ff5e62, #ff9966);
     font-style: bold;
-    outline-color: #333;
 }
 
-button:focus {
+button:focus, input:focus {
     outline: 0;
 }
 
@@ -79,7 +78,7 @@ header button:hover {
     background: linear-gradient(to right, #ff5e62, #ff9966);
 }
 
-header button:hover > #generateBtn span {
+header button:hover > span {
     color: white;
 }
 
@@ -109,8 +108,9 @@ main button:hover {
     padding-bottom: 20px;
 }
 
-#new-topic p {
-    font-style: italic;
+#new-topic input {
+    font-size: 18px;
+    padding: 5px;
 }
 
 main {
@@ -157,6 +157,11 @@ main div form {
     padding: 0;
 }
 
+footer {
+    background: #444;
+    height: 30vh;
+}
+
 @media only screen and (max-width: 800px) {
     main {
         flex-direction: column;
@@ -169,3 +174,4 @@ main div form {
         width: 60%;
     }
 }
+
