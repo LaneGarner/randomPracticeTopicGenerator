@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="main2.js" defer></script>
+    <title>ShedScrambler</title>
+</head>
+<body>
+    <header>
+        <!-- <i class="fas fa-guitar"></i> -->
+        <h1>ShedScrambler</h1>
+        <h2>Random practice topic generator for musicians</h2>
+        <div id="generate-area">
+            <button id="generateBtn">Generate a <span>random practice topic</span></button>
+            <div id="generateTopic"></div>
+        </div>
+    </header>
+    <main>
+        <div> 
+            <h3>What do you want to shed?</h3>
+            <form id="new-topic" onsubmit="return false">
+                <label for="topicInput">Enter a new practice topic:</label><br>
+                <input type="text" id="topicInput"><br>
+                <!-- <p>Be as general or specific as you'd like</p> -->
+                <button>Add</button>
+            </form>
+        </div>
+        <div id="myTopics">
+            <h3>My practice topics:</h3>
+            <ul id="practiceTopicList"></ul>
+            <button id="clearBtn">Clear</button>
+        </div>
+    </main>
+</body>
+</html>

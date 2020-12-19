@@ -1,0 +1,171 @@
+* {
+    color: #333;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fa-trash {
+    color: #AAA;
+    cursor: pointer;
+    margin-left: .5em;
+}
+
+.fa-trash:hover {
+    color: tomato;
+    transition-duration: 600ms
+}
+
+.fa-guitar {
+    font-size: 3em;
+}
+
+header {
+    padding-top: 10px;
+    background: #ff5e62;
+    background: -webkit-linear-gradient(to right, #ff5e62, #ff9966);
+    background: linear-gradient(to right, #ff5e62, #ff9966);
+}
+
+header h1 {
+    margin: 0;
+    color: white;
+    font-family: BungeeOutline;
+}
+
+header h2 {
+    margin-top: 0;
+    font-size: .9em;
+}
+
+header button, main button {
+    cursor: pointer;
+    color: white;
+    padding: 15px;
+    margin: 40px auto;
+    border-radius: 30px;
+    border: none;
+    background: #ff9966;
+    background: -webkit-linear-gradient(to left, #ff5e62, #ff9966);
+    background: linear-gradient(to left, #ff5e62, #ff9966);
+    font-style: bold;
+    outline-color: #333;
+}
+
+button:focus {
+    outline: 0;
+}
+
+main {
+    background: #444;
+    /* height: 80vh; */
+}
+
+main button {
+    border-radius: 16px;
+    color: white;
+    background: #00B4DB;
+    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+    background: linear-gradient(to right, #0083B0, #00B4DB);
+}
+
+header button:hover {
+    color: #333;
+    background: #ff9966;
+    background: -webkit-linear-gradient(to right, #ff5e62, #ff9966);
+    background: linear-gradient(to right, #ff5e62, #ff9966);
+}
+
+header button:hover > #generateBtn span {
+    color: white;
+}
+
+main button:hover {
+    color: white;
+    background: #0da8b6;
+    background: #00B4DB;
+    background: -webkit-linear-gradient(to left, #0083B0, #00B4DB);
+    background: linear-gradient(to left, #0083B0, #00B4DB);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+#generate-area {
+    background: #333;
+    width: 100vw;
+    margin: 0;
+    /* min-height: 200px; */
+    display: flex;
+    flex-direction: column;
+}
+
+#generateTopic {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-family: sans-serif;
+    padding-bottom: 20px;
+}
+
+#new-topic p {
+    font-style: italic;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+body { 
+    margin: 0;
+}
+
+main div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+    width: 40%;
+    background: #333;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+main div h3, main div label, main div li{
+    color: white;
+}
+
+main div form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 10%;
+}
+
+#practiceTopicList li {
+    padding: 5px;
+    max-width: 250px;
+}
+
+#myTopics ul {
+    list-style-type:none;
+    text-align: center;
+    padding: 0;
+}
+
+@media only screen and (max-width: 800px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+    main button {
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+    main div {
+        width: 60%;
+    }
+}
