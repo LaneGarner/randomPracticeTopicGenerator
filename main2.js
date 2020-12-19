@@ -22,14 +22,17 @@ window.onload = () => {
 
     if (localStorage.getItem('topics') === null) {
         let topics = ["Scales", "Ear-training", "New repertoire", "Repertoire review"];
-        localStorage.setItem('topics');
+        localStorage.setItem('topics', JSON.stringify(topics));
+        
         // storeTopicInLocalStorage(topics);
-        // displayTopics();
+        displayTopics();
     } else {
         let topics = JSON.parse(localStorage.getItem('topics'));
+        
+        displayTopics();
+        topics.length === 0 || topics === undefined ? myTopics.style.display = "none" : myTopics.style.display = "flex";
     }
-    displayTopics();
-    // topics.length === 0 ? myTopics.style.display = "none" : myTopics.style.display = "flex";
+    // console.log(topics)
 
     document.querySelector('#topicInput').focus();
 }
@@ -39,6 +42,8 @@ clearOut = (item) => {
 }
 
 const displayTopics = () => {
+    clearOut(topicList);
+
     let topics;
 
     if (localStorage.getItem('topics') === null) {
@@ -59,17 +64,18 @@ const displayTopics = () => {
 }
 
 const addTopic = (e) => {
-    if (topicInput.value === '') {
-        alert('Please add a topic');
-    } else {
+    const regex = /.*\S+.*/
+    if (topicInput.value.match(regex)) {
         let topics;
         localStorage.getItem('topics') === null ? topics = [] : topics = JSON.parse(localStorage.getItem('topics'));
         topics.length >= 0 ? myTopics.style.display = "flex" : myTopics.style.display = "none";    
         storeTopicInLocalStorage(topicInput.value);
-        clearOut(topicList);
+        // clearOut(topicList);
         displayTopics();
         topicInput.value = '';
         // e.preventDefault();
+    } else {
+        alert("Please add a topic");
     }
 }
 
@@ -114,7 +120,7 @@ const removeTopic = (e) => {
                 removeTopicFromLocalStorage(e.target.parentElement);
             }
         });
-        clearOut(topicList);
+        // clearOut(topicList);
         displayTopics();
     }
 
@@ -150,7 +156,7 @@ const clearTopics = () => {
     if (confirm('Are You Sure?')) {
         topics.length = 0;
         localStorage.setItem('topics', JSON.stringify(topics));
-        clearOut(topicList);
+        // clearOut(topicList);
         displayTopics();
     }
 
