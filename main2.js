@@ -9,7 +9,7 @@ const myTopics = document.querySelector("#myTopics");
 window.onload = () => {
     if(typeof window.localStorage !== "undefined" && !localStorage.getItem('visited')) {
         // Set visited flag in local storage
-        // let topics = "Scales", "Ear-training", "New repertoire", "Repertoire review";
+        // let topics = ["Scales", "Ear-training", "New repertoire", "Repertoire review"];
         // let topics = [];
         // storeTopicInLocalStorage(topics);
         // displayTopics();
@@ -21,10 +21,13 @@ window.onload = () => {
     let topics;
 
     if (localStorage.getItem('topics') === null) {
-        topics = [];
+        let topics = ["Scales", "Ear-training", "New repertoire", "Repertoire review"];
+        storeTopicInLocalStorage(topics);
+        displayTopics();
     } else {
         topics = JSON.parse(localStorage.getItem('topics'));
     }
+    
     topics.length === 0 ? myTopics.style.display = "none" : myTopics.style.display = "flex";
 
     document.querySelector('#topicInput').focus();
