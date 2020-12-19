@@ -2,6 +2,16 @@
     color: #333;
 }
 
+@font-face {
+    font-family: "BungeeOutline";
+    src: url("fonts/BungeeOutline.ttf")
+}
+
+@font-face {
+    font-family: "Merriweather";
+    src: url("fonts/Merriweather.ttf")
+}
+
 header {
     display: flex;
     flex-direction: column;
@@ -33,12 +43,13 @@ header {
 header h1 {
     margin: 0;
     color: white;
-    font-family: BungeeOutline;
+    font-family: Merriweather, serif;
 }
 
 header h2 {
     margin-top: 0;
     font-size: .9em;
+    font-family: Merriweather, serif;
 }
 
 header button, main button {
@@ -51,7 +62,7 @@ header button, main button {
     background: #ff9966;
     background: -webkit-linear-gradient(to left, #ff5e62, #ff9966);
     background: linear-gradient(to left, #ff5e62, #ff9966);
-    font-style: bold;
+    font-family: sans-serif;
 }
 
 button:focus, input:focus {
@@ -139,6 +150,14 @@ main div h3, main div label, main div li{
     color: white;
 }
 
+main div h3 {
+    font-family: Merriweather;
+}
+
+main div label {
+    font-family: sans-serif;
+}
+
 main div form {
     display: flex;
     flex-direction: column;
@@ -149,6 +168,7 @@ main div form {
 #practiceTopicList li {
     padding: 5px;
     max-width: 250px;
+    font-family: sans-serif;
 }
 
 #myTopics ul {
