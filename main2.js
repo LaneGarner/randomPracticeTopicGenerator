@@ -18,17 +18,18 @@ window.onload = () => {
         displayTopics();
     }
 
-    let topics;
+    // let topics ;
 
     if (localStorage.getItem('topics') === null) {
         let topics = ["Scales", "Ear-training", "New repertoire", "Repertoire review"];
-        storeTopicInLocalStorage(topics);
-        displayTopics();
+        localStorage.setItem('topics');
+        // storeTopicInLocalStorage(topics);
+        // displayTopics();
     } else {
-        topics = JSON.parse(localStorage.getItem('topics'));
+        let topics = JSON.parse(localStorage.getItem('topics'));
     }
-    
-    topics.length === 0 ? myTopics.style.display = "none" : myTopics.style.display = "flex";
+    displayTopics();
+    // topics.length === 0 ? myTopics.style.display = "none" : myTopics.style.display = "flex";
 
     document.querySelector('#topicInput').focus();
 }
