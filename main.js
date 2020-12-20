@@ -27,6 +27,7 @@ window.onload = () => {
         topics.length === 0 || topics === undefined ? myTopics.style.display = "none" : myTopics.style.display = "flex";
     }
     document.querySelector('#topicInput').focus();
+    loadEventListeners();
 }
 
 clearOut = (item) => {
@@ -184,4 +185,4 @@ const loadEventListeners = () => {
     generateBtn.addEventListener('click', generateRandomTopic);
 }
 
-loadEventListeners();
+// loadEventListeners();
