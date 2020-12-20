@@ -1,116 +1,177 @@
+const form = document.querySelector('#new-topic');
+const topicList = document.querySelector('#practiceTopicList');
+const clearBtn = document.querySelector('#clearBtn');
+const generateBtn = document.querySelector("#generateBtn");
+const topicInput = document.querySelector('#topicInput');
+const display = document.querySelector("#generateTopic");
 const myTopics = document.querySelector("#myTopics");
-const practiceTopicList = document.querySelector("#practiceTopicList");
-const topicInput = document.querySelector("#topicInput");
-
-
-
-// let practiceTopics = ["Scales", "Ear-training", "New repertoire", "Repertoire review"];
-let practiceTopics = [];
 
 window.onload = () => {
-    document.querySelector('#topicInput').focus();
-
-    // // Check if localStorage is available (IE8+) and make sure that the visited flag is not already set.
+    // typeof window.localStorage !== "undefined" && !localStorage.getItem(visited) ? localStorage.setItem('visited', true) : displayTopics();
+    
     if(typeof window.localStorage !== "undefined" && !localStorage.getItem('visited')) {
-         // Set visited flag in local storage
         localStorage.setItem('visited', true);
-        practiceTopics = [];
-        practiceTopics.push("Scales", "Ear-training", "New repertoire", "Repertoire review");
-        storeInLocalStorage();
-         // Alert the user
-        alert("Hello my friend. This is your first visit.");   
-    } else if (practiceTopics == undefined) {
-        practiceTopics = []
-        console.log(practiceTopics)
     } else {
-        practiceTopics = JSON.parse(localStorage.getItem("practiceTopics"));
-        console.log(practiceTopics)
-    }
-
-    displayTopics();
-}
-
-
-// let tasks;
-//     if (localStorage.getItem('tasks') === null) {
-//         tasks = [];
-//     } else {
-//         tasks = JSON.parse(localStorage.getItem('tasks'));
-//     }
-
-// const storeInLocalStorage = (topic) => {
-//     // if (localStorage.getItem('practiceTopics') === null) {
-//     //     practiceTopics = [];
-//     // } else {
-//     //     practiceTopics = JSON.parse(localStorage.getItem('practiceTopics'));
-//     // }
-//     practiceTopics = JSON.parse(localStorage.getItem("practiceTopics"));
-
-//     practiceTopics.push(topic);
-
-//     localStorage.setItem("practiceTopics", JSON.stringify(practiceTopics));
-// }
-
-const addTopic = () => {
-
-    // if (practiceTopics.length === 0){
-    //     myTopics.style.display = "flex";
-    // }
-
-    let topicInput = document.querySelector("#topicInput").value;
-    topicInput == "" ? alert("Add a topic") : practiceTopics.unshift(topicInput);
-    practiceTopicList.innerHTML = "";
-    document.querySelector("#topicInput").value = "";
-    document.querySelector('#topicInput').focus();
-    displayTopics();
-}
-
-const removeTopic = (e) => {
-    if (confirm('Are You Sure?')) {
-        practiceTopics.forEach((task, index) => {
-            practiceTopicList.innerHTML = "";
-            if (e.target.parentElement.textContent === task) {
-                practiceTopics.splice(index, 1);
-            }
         displayTopics();
-        });
     }
-    if (practiceTopics.length === 0){
-        document.querySelector("#myTopics").style.display = "none";
+    
+    // let topics ;
+
+    if (localStorage.getItem('topics') === null) {
+        let topics = ["Scales", "Ear-training", "New repertoire", "Repertoire review"];
+        localStorage.setItem('topics', JSON.stringify(topics));
+        
+        // storeTopicInLocalStorage(topics);
+        displayTopics();
+    } else {
+        let topics = JSON.parse(localStorage.getItem('topics'));
+        
+        displayTopics();
+        topics.length === 0 || topics === undefined ? myTopics.style.display = "none" : myTopics.style.display = "flex";
     }
+    // console.log(topics)
+
+    document.querySelector('#topicInput').focus();
+}
+
+clearOut = (item) => {
+    item.innerHTML = "";
 }
 
 const displayTopics = () => {
-    localStorage.setItem("practiceTopics", JSON.stringify(practiceTopics));
-    
-    practiceTopics.forEach((input) => {
-        const topicDisplay = document.createElement("li");
-            topicDisplay.innerHTML = input;
+    clearOut(topicList);
+
+    let topics;
+
+    if (localStorage.getItem('topics') === null) {
+        topics = [];
+    } else {
+        topics = JSON.parse(localStorage.getItem('topics'));
+    }
+
+    topics.forEach(topic => {
+        const li = document.createElement('li');
+            li.innerHTML = topic;
         const button = document.createElement("i");
             button.classList = "fas fa-trash";
             button.addEventListener("click", removeTopic);
-        
-        topicDisplay.appendChild(button);
-        
-        practiceTopicList.appendChild(topicDisplay)
-    })
-    // if (practiceTopics.length === 0){
-    //     document.querySelector("#myTopics").style.display = "none";
-    // }
+        li.appendChild(button);
+        topicList.appendChild(li);
+    });
+}
+
+const addTopic = (e) => {
+    const regex = /.*\S+.*/
+    if (topicInput.value.match(regex)) {
+        let topics;
+        localStorage.getItem('topics') === null ? topics = [] : topics = JSON.parse(localStorage.getItem('topics'));
+        topics.length >= 0 ? myTopics.style.display = "flex" : myTopics.style.display = "none";    
+        storeTopicInLocalStorage(topicInput.value);
+        displayTopics();
+        topicInput.value = '';
+        // e.preventDefault();
+    } else {
+        alert("Please add a topic");
+    }
+}
+
+const storeTopicInLocalStorage = (topic) => {
+    let topics;
+    localStorage.getItem('topics') === null ? topics = [] : topics = JSON.parse(localStorage.getItem('topics'));
+    topics.push(topic);
+    localStorage.setItem('topics', JSON.stringify(topics));
+}
+
+const removeTopic = (e) => {
+
+    let topics;
+    if (localStorage.getItem('topics') === null) {
+        topics = [];
+    } else {
+        topics = JSON.parse(localStorage.getItem('topics'));
+    }
     
+    if (confirm('Are You Sure?')) {
+        topics.forEach((topic, index) => {
+            // console.log(index, e.target.parentElement.textContent, topic)
+            if (e.target.parentElement.textContent === topic) {
+                topics.splice(index, 1);
+                removeTopicFromLocalStorage(e.target.parentElement);
+            }
+        });
+        displayTopics();
+    }
+
+    topics.length === 0 ? myTopics.style.display = "none" : myTopics.style.display = "flex";
+    
+}
+
+
+//remove from ls
+
+const removeTopicFromLocalStorage = (topicItem) => {
+    let topics;
+    localStorage.getItem('topics') === null ? topics = [] : topics = JSON.parse(localStorage.getItem('topics'));
+
+    topics.forEach(function (topic, index) {
+        if (topicItem.textContent === topic) {
+            topics.splice(index, 1);
+        }
+    });
+
+    localStorage.setItem('topics', JSON.stringify(topics));
+}
+
+//Clear topics
+const clearTopics = () => {
+    let topics;
+    if (localStorage.getItem('topics') === null) {
+        topics = [];
+    } else {
+        topics = JSON.parse(localStorage.getItem('topics'));
+    }
+
+    if (confirm('Are You Sure?')) {
+        topics.length = 0;
+        localStorage.setItem('topics', JSON.stringify(topics));
+        displayTopics();
+    }
+
+    topics.length === 0 ? myTopics.style.display = "none" : myTopics.style.display = "flex";
+
 
 }
-// displayTopics();
 
+
+//Filter Topics
+// function filterTopics(e) {
+//     const text = e.target.value.toLowerCase();
+
+//     document.querySelectorAll('.collection-item').forEach
+//         (function (topic) {
+//             const item = topic.firstChild.textContent;
+//             if (item.toLowerCase().indexOf(text) != -1) {
+//                 topic.style.display = 'block';
+//             } else {
+//                 topic.style.display = 'none';
+//             }
+//         });
+// }
 
 const generateRandomTopic = () => {
-    const display = document.querySelector("#generateTopic");
 
-    if (practiceTopics.length === 0){
+    let topics;
+    if (localStorage.getItem('topics') === null) {
+        topics = [];
+    } else {
+        topics = JSON.parse(localStorage.getItem('topics'));
+    }
+
+    if (topics.length === 0){
         display.innerHTML = "Please enter a topic...";
     } else {
 
-        const random = practiceTopics[Math.floor(Math.random() * practiceTopics.length)]
+        const random = topics[Math.floor(Math.random() * topics.length)]
     
     
         if(display.textContent === random){
@@ -121,32 +182,10 @@ const generateRandomTopic = () => {
     }
 }
 
-const clearList = () => {
-
-    if (confirm('Are You Sure?')) {
-        practiceTopics.length = 0;
-        document.querySelector("#practiceTopicList").innerHTML = "";
-    
-        //remove from LS
-        // removeTaskFromLocalStorage(e.target.parentElement.parentElement);
-    }
-
-    if (practiceTopics.length === 0){
-        document.querySelector("#myTopics").style.display = "none";
-    }
-
+const loadEventListeners = () => {
+    form.addEventListener('submit', addTopic);
+    clearBtn.addEventListener('click', clearTopics);
+    generateBtn.addEventListener('click', generateRandomTopic);
 }
 
-
-//TODO:
-
-
-//IDEAS:
-
-// eventually add generate practice topics by level
-
-//hover over trashcan for delete
-
-//Help feature describing the functionality
-
-//Local storage
+loadEventListeners();

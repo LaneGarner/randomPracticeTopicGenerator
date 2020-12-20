@@ -3,8 +3,8 @@
 }
 
 @font-face {
-    font-family: "BungeeOutline";
-    src: url("fonts/BungeeOutline.ttf")
+    font-family: "coolvetica";
+    src: url("fonts/coolvetica.ttf")
 }
 
 @font-face {
@@ -29,10 +29,6 @@ header {
     transition-duration: 600ms
 }
 
-.fa-guitar {
-    font-size: 3em;
-}
-
 header {
     padding-top: 10px;
     background: #ff5e62;
@@ -43,7 +39,9 @@ header {
 header h1 {
     margin: 0;
     color: white;
-    font-family: Merriweather, serif;
+    font-family: coolvetica, serif;
+    font-size: 4em;
+    /* font-family: BungeeOutline; */
 }
 
 header h2 {
