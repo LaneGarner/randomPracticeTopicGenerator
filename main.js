@@ -36,6 +36,7 @@ const displayTopics = () => {
             li.innerHTML = topic;
         const button = document.createElement("i");
             button.classList = "fas fa-trash";
+            button.title = "Delete"
             button.addEventListener("click", removeTopic);
         li.appendChild(button);
         topicList.appendChild(li);
