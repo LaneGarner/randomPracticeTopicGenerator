@@ -7,30 +7,25 @@ const display = document.querySelector("#generateTopic");
 const myTopics = document.querySelector("#myTopics");
 
 window.onload = () => {
-    // typeof window.localStorage !== "undefined" && !localStorage.getItem(visited) ? localStorage.setItem('visited', true) : displayTopics();
+    typeof window.localStorage !== "undefined" && !localStorage.getItem('visited') ? localStorage.setItem('visited', true) : displayTopics();
     
-    if(typeof window.localStorage !== "undefined" && !localStorage.getItem('visited')) {
-        localStorage.setItem('visited', true);
-    } else {
-        displayTopics();
-    }
+    // if(typeof window.localStorage !== "undefined" && !localStorage.getItem('visited')) {
+    //     localStorage.setItem('visited', true);
+    // } else {
+    //     displayTopics();
+    // }
     
     // let topics ;
 
     if (localStorage.getItem('topics') === null) {
         let topics = ["Scales", "Ear-training", "New repertoire", "Repertoire review"];
         localStorage.setItem('topics', JSON.stringify(topics));
-        
-        // storeTopicInLocalStorage(topics);
         displayTopics();
     } else {
         let topics = JSON.parse(localStorage.getItem('topics'));
-        
         displayTopics();
         topics.length === 0 || topics === undefined ? myTopics.style.display = "none" : myTopics.style.display = "flex";
     }
-    // console.log(topics)
-
     document.querySelector('#topicInput').focus();
 }
 
@@ -40,14 +35,14 @@ clearOut = (item) => {
 
 const displayTopics = () => {
     clearOut(topicList);
-
     let topics;
 
-    if (localStorage.getItem('topics') === null) {
-        topics = [];
-    } else {
-        topics = JSON.parse(localStorage.getItem('topics'));
-    }
+    // if (localStorage.getItem('topics') === null) {
+    //     topics = [];
+    // } else {
+    //     topics = JSON.parse(localStorage.getItem('topics'));
+    // }
+    localStorage.getItem('topics') === null ? topics = [] : topics = JSON.parse(localStorage.getItem('topics'));
 
     topics.forEach(topic => {
         const li = document.createElement('li');
@@ -83,7 +78,6 @@ const storeTopicInLocalStorage = (topic) => {
 }
 
 const removeTopic = (e) => {
-
     let topics;
     if (localStorage.getItem('topics') === null) {
         topics = [];
@@ -101,9 +95,7 @@ const removeTopic = (e) => {
         });
         displayTopics();
     }
-
     topics.length === 0 ? myTopics.style.display = "none" : myTopics.style.display = "flex";
-    
 }
 
 
@@ -125,11 +117,14 @@ const removeTopicFromLocalStorage = (topicItem) => {
 //Clear topics
 const clearTopics = () => {
     let topics;
-    if (localStorage.getItem('topics') === null) {
-        topics = [];
-    } else {
-        topics = JSON.parse(localStorage.getItem('topics'));
-    }
+    // if (localStorage.getItem('topics') === null) {
+    //     topics = [];
+    // } else {
+    //     topics = JSON.parse(localStorage.getItem('topics'));
+    // }
+
+    localStorage.getItem('topics') === null ? topics = [] : topics = JSON.parse(localStorage.getItem('topics'));
+
 
     if (confirm('Are You Sure?')) {
         topics.length = 0;
@@ -159,26 +154,27 @@ const clearTopics = () => {
 // }
 
 const generateRandomTopic = () => {
-
     let topics;
-    if (localStorage.getItem('topics') === null) {
-        topics = [];
-    } else {
-        topics = JSON.parse(localStorage.getItem('topics'));
-    }
+    // if (localStorage.getItem('topics') === null) {
+    //     topics = [];
+    // } else {
+    //     topics = JSON.parse(localStorage.getItem('topics'));
+    // }
+
+    localStorage.getItem('topics') === null ? topics = [] : topics = JSON.parse(localStorage.getItem('topics'));
 
     if (topics.length === 0){
         display.innerHTML = "Please enter a topic...";
     } else {
-
         const random = topics[Math.floor(Math.random() * topics.length)]
-    
-    
-        if(display.textContent === random){
-            generateRandomTopic()
-        } else {
-            display.innerHTML = random;
-        }
+        
+        // if(display.textContent === random){
+        //     generateRandomTopic()
+        // } else {
+        //     display.innerHTML = random;
+        // }
+        display.textContent === random ? generateRandomTopic() : display.innerHTML = random;
+        // }
     }
 }
 
